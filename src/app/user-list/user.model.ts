@@ -1,13 +1,11 @@
 export class User {
     public username: string;
     public role: string;
-    public isEnabled: boolean;
-    public isLocked: boolean;
+    public status: string;
 
-    constructor(username: string, role: string, isEnabled: boolean, isLocked: boolean) {
+    constructor(username: string, role: string, status: string) {
         this.username = username;
         this.role = role;
-        this.isEnabled = isEnabled;
-        this.isLocked = isLocked;
+        this.status = status;
     }
 }

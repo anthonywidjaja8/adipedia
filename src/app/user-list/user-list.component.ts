@@ -8,13 +8,17 @@ import { User } from './user.model';
 })
 export class UserListComponent implements OnInit {
   users: User[] = [
-    new User('anthony@gmail.com', 'Admin', true, true),
-    new User('adi@gmail.com', 'User', true, true)
+    new User('anthony@gmail.com', 'Admin', 'Active'),
+    new User('adi@gmail.com', 'User', 'Inactive')
   ]
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onUserAdded(user: User) {
+    this.users.push(user);
   }
 
 }
