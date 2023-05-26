@@ -11,6 +11,7 @@ import { ProductItemComponent } from './products/product-list/product-item/produ
 import { UserListComponent } from './user-list/user-list.component';
 import { UserEditComponent } from './user-list/user-edit/user-edit.component';
 import { FormsModule } from '@angular/forms';
+import { DropdownDirective } from './shared/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FormsModule } from '@angular/forms';
     ProductDetailComponent,
     ProductItemComponent,
     UserListComponent,
-    UserEditComponent
+    UserEditComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,
