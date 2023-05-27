@@ -13,6 +13,8 @@ import { UserEditComponent } from './user-list/user-edit/user-edit.component';
 import { FormsModule } from '@angular/forms';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { UserListService } from './user-list/user-list.service';
+import { ProductStartComponent } from './products/product-start/product-start.component';
+import { ProductEditComponent } from './products/product-edit/product-edit.component';
 
 @NgModule({
   declarations: [
@@ -24,12 +26,15 @@ import { UserListService } from './user-list/user-list.service';
     ProductItemComponent,
     UserListComponent,
     UserEditComponent,
-    DropdownDirective
+    DropdownDirective,
+    ProductStartComponent,
+    ProductEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [UserListService],
   bootstrap: [AppComponent]

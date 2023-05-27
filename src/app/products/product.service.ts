@@ -18,4 +18,8 @@ export class ProductService {
     getProducts() {
         return this.products.slice();
     }
+
+    getProduct(index: number) {
+        return this.products[index];
+    }
 }
