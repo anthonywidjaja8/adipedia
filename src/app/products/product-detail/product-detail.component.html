@@ -26,3 +26,12 @@
         {{ product.description }}
     </div>
 </div>
+<div class="row">
+    <div class="col-xs-12">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let category of product.categories">
+                {{category}}
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,5 +1,6 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../product.model';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -7,19 +8,12 @@ import { Product } from '../product.model';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  @Output() productWasSelected = new EventEmitter<Product>();
-  products: Product[] = [
-    new Product('Product A', 10000, 'Product Desc', 'https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
-    new Product('Product B', 10000, 'Product Desc', 'https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-  ];
+  products: Product[];
 
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-  }
-
-  onProductSelected(product: Product) {
-    this.productWasSelected.emit(product);
+    this.products = this.productService.getProducts();
   }
 
 }

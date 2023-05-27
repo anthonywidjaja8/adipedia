@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { UserListService } from '../user-list.service';
 import { User } from '../user.model';
 
 @Component({
@@ -10,9 +11,8 @@ export class UserEditComponent implements OnInit {
   @ViewChild('nameInput') nameInputRef: ElementRef;
   @ViewChild('roleInput') roleInputRef: ElementRef;
   @ViewChild('statusInput') statusInputRef: ElementRef;
-  @Output() userAdded = new EventEmitter<User>();
 
-  constructor() { }
+  constructor(private userListService: UserListService) { }
 
   ngOnInit(): void {
   }
@@ -22,7 +22,7 @@ export class UserEditComponent implements OnInit {
     const userRole = this.roleInputRef.nativeElement.value;
     const userStatus = this.statusInputRef.nativeElement.value;
     const newUser = new User(userName, userRole, userStatus);
-    this.userAdded.emit(newUser);
+    this.userListService.addUsers(newUser);
   }
 
 }
