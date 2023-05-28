@@ -8,7 +8,7 @@ import { Product } from '../../../shared/product.model';
 })
 export class ProductItemComponent implements OnInit {
   @Input() product: Product;
-  @Input() index: number
+  @Input() index: number;
 
   ngOnInit(): void {
   }

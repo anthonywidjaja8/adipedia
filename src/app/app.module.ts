@@ -21,6 +21,8 @@ import { ReportsComponent } from './reports/reports.component';
 import { HomeListComponent } from './home/home-list/home-list.component';
 import { HomeDetailComponent } from './home/home-detail/home-detail.component';
 import { HomeService } from './home/home.service';
+import { HomeItemComponent } from './home/home-list/home-item/home-item.component';
+import { HomeStartComponent } from './home/home-start/home-start.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { HomeService } from './home/home.service';
     OrdersComponent,
     ReportsComponent,
     HomeListComponent,
-    HomeDetailComponent
+    HomeDetailComponent,
+    HomeItemComponent,
+    HomeStartComponent
   ],
   imports: [
     BrowserModule,

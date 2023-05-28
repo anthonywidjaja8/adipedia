@@ -23,6 +23,10 @@ export class HomeService {
         return this.products.slice();
     }
 
+    getProduct(index: number) {
+        return this.products[index];
+    }
+
     addProduct(product: Product) {
         this.products.push(product);
         this.productChanged.next(this.products.slice());

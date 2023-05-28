@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeDetailComponent } from './home/home-detail/home-detail.component';
+import { HomeStartComponent } from './home/home-start/home-start.component';
 import { HomeComponent } from './home/home.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
@@ -10,8 +12,11 @@ import { ReportsComponent } from './reports/reports.component';
 import { UserListComponent } from './user-list/user-list.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/products', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'home', component: HomeComponent, children: [
+    {path: '', component: HomeStartComponent},
+    {path: ':id', component: HomeDetailComponent}
+  ]},
   {path: 'products', component: ProductsComponent, children: [
     {path: '', component: ProductStartComponent},
     {path: 'new', component: ProductEditComponent},

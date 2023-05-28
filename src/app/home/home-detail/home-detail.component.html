@@ -1,1 +1,25 @@
-<p>home-detail works!</p>
+<h4>Product Details</h4>
+<div class="row">
+    <div class="col-xs-12">
+        <img [src]="product.imagePath" alt="{{ product.name }}" class="img-responsive" style="max-height: 300px">
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <h1>{{ product.name }}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        {{ product.description }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let category of product.categories">
+                {{category}}
+            </li>
+        </ul>
+    </div>
+</div>
