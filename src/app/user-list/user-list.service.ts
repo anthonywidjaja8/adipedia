@@ -1,8 +1,8 @@
-import { EventEmitter } from "@angular/core";
+import { Subject } from "rxjs";
 import { User } from "./user.model";
 
 export class UserListService {
-    usersChanged = new EventEmitter<User[]>();
+    userChanged = new Subject<User[]>();
     private users: User[] = [
         new User('anthony@gmail.com', 'Admin', 'Active'),
         new User('adi@gmail.com', 'User', 'Inactive')
@@ -12,8 +12,8 @@ export class UserListService {
         return this.users.slice();
     }
 
-    addUsers(user: User) {
+    addUser(user: User) {
         this.users.push(user);
-        this.usersChanged.emit(this.users.slice()); 
+        this.userChanged.next(this.users.slice()); 
     }
 }

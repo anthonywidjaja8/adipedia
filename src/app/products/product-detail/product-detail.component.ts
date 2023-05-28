@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Product } from '../product.model';
+import { Product } from '../../shared/product.model';
 import { ProductService } from '../product.service';
 
 @Component({
@@ -21,6 +21,10 @@ export class ProductDetailComponent implements OnInit {
         this.product = this.productService.getProduct(this.id);
       }
     )
+  }
+
+  onAddToHome() {
+    this.productService.addProductToHome(this.product);
   }
 
   onEditRecipe() {

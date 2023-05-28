@@ -15,6 +15,12 @@ import { DropdownDirective } from './shared/dropdown.directive';
 import { UserListService } from './user-list/user-list.service';
 import { ProductStartComponent } from './products/product-start/product-start.component';
 import { ProductEditComponent } from './products/product-edit/product-edit.component';
+import { HomeComponent } from './home/home.component';
+import { OrdersComponent } from './orders/orders.component';
+import { ReportsComponent } from './reports/reports.component';
+import { HomeListComponent } from './home/home-list/home-list.component';
+import { HomeDetailComponent } from './home/home-detail/home-detail.component';
+import { HomeService } from './home/home.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +34,12 @@ import { ProductEditComponent } from './products/product-edit/product-edit.compo
     UserEditComponent,
     DropdownDirective,
     ProductStartComponent,
-    ProductEditComponent
+    ProductEditComponent,
+    HomeComponent,
+    OrdersComponent,
+    ReportsComponent,
+    HomeListComponent,
+    HomeDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +47,7 @@ import { ProductEditComponent } from './products/product-edit/product-edit.compo
     FormsModule,
     AppRoutingModule
   ],
-  providers: [UserListService],
+  providers: [HomeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

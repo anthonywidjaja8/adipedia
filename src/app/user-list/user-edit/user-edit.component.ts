@@ -22,7 +22,7 @@ export class UserEditComponent implements OnInit {
     const userRole = this.roleInputRef.nativeElement.value;
     const userStatus = this.statusInputRef.nativeElement.value;
     const newUser = new User(userName, userRole, userStatus);
-    this.userListService.addUsers(newUser);
+    this.userListService.addUser(newUser);
   }
 
 }
