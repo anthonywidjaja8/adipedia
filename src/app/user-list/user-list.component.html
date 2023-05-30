@@ -3,7 +3,7 @@
         <app-user-edit></app-user-edit>
         <hr>
         <ul class="list-group">
-            <a href="# " class="list-group-item " style="cursor: pointer " *ngFor="let user of users">
+            <a class="list-group-item " style="cursor: pointer " *ngFor="let user of users; let i = index" (click)="onEditItem(i)">
                 {{ user.username }} ({{ user.role }}) | Status: {{ user.status }}
             </a>
         </ul>

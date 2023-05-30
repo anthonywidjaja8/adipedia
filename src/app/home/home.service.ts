@@ -15,7 +15,7 @@ export class HomeService {
             ['Goods', 'Cloth']),
         new Product(
             'Product C', 30000, 'Desc C', 
-            'https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+            'https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg',
             ['Goods', 'Cloth'])
     ];
 

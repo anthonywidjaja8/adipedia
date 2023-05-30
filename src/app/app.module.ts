@@ -10,7 +10,7 @@ import { ProductDetailComponent } from './products/product-detail/product-detail
 import { ProductItemComponent } from './products/product-list/product-item/product-item.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserEditComponent } from './user-list/user-edit/user-edit.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { UserListService } from './user-list/user-list.service';
 import { ProductStartComponent } from './products/product-start/product-start.component';
@@ -23,6 +23,7 @@ import { HomeDetailComponent } from './home/home-detail/home-detail.component';
 import { HomeService } from './home/home.service';
 import { HomeItemComponent } from './home/home-list/home-item/home-item.component';
 import { HomeStartComponent } from './home/home-start/home-start.component';
+import { ProductService } from './products/product.service';
 
 @NgModule({
   declarations: [
@@ -49,9 +50,10 @@ import { HomeStartComponent } from './home/home-start/home-start.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [HomeService],
+  providers: [HomeService, ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

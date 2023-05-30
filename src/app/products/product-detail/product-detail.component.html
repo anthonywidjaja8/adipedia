@@ -17,9 +17,14 @@
             <ul class="dropdown-menu">
                 <li><a style="cursor: pointer;" (click)="onAddToHome()">Add to Home</a></li>
                 <li><a style="cursor: pointer;" (click)="onEditRecipe()">Edit Product</a></li>
-                <li><a style="cursor: pointer;">Delete Product</a></li>
+                <li><a style="cursor: pointer;" (click)="onDeleteRecipe()">Delete Product</a></li>
             </ul>
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        {{ product.price }}
     </div>
 </div>
 <div class="row">

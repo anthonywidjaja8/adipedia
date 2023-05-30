@@ -1,9 +1,11 @@
 import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 import { HomeService } from "../home/home.service";
 import { Product } from "../shared/product.model";
 
 @Injectable()
 export class ProductService {
+    productsChanged = new Subject<Product[]>();
 
     private products: Product[] = [
         new Product(
@@ -41,4 +43,20 @@ export class ProductService {
     addProductToHome(product: Product) {
         this.homeService.addProduct(product);
     }
+
+    addProduct(product: Product) {
+        this.products.push(product);
+        this.productsChanged.next(this.products.slice());
+    }
+
+    updateProduct(index: number, newProduct: Product) {
+        this.products[index] = newProduct;
+        this.productsChanged.next(this.products.slice());
+    }
+
+    deleteProduct(index: number) {
+        this.products.splice(index, 1);
+        this.productsChanged.next(this.products.slice());
+    }
+
 }

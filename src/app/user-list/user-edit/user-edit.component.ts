@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { UserListService } from '../user-list.service';
 import { User } from '../user.model';
 
@@ -7,22 +9,56 @@ import { User } from '../user.model';
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.css']
 })
-export class UserEditComponent implements OnInit {
-  @ViewChild('nameInput') nameInputRef: ElementRef;
-  @ViewChild('roleInput') roleInputRef: ElementRef;
-  @ViewChild('statusInput') statusInputRef: ElementRef;
+export class UserEditComponent implements OnInit, OnDestroy {
+  @ViewChild('form') userForm: NgForm;
+  subscription: Subscription;
+  editMode = false;
+  editedUserIndex: number;
+  editedUser: User;
+  defaultRole = 'Admin';
+  defaultStatus = 'Active';
 
   constructor(private userListService: UserListService) { }
 
   ngOnInit(): void {
+    this.subscription = this.userListService.startedEditing.subscribe(
+      (index: number) => {
+        this.editedUserIndex = index;
+        this.editMode = true;
+        this.editedUser = this.userListService.getUser(index);
+        this.userForm.setValue({
+          username: this.editedUser.username,
+          role: this.editedUser.role,
+          status: this.editedUser.status
+        })
+      }
+    );
   }
 
-  onAddItem() {
-    const userName = this.nameInputRef.nativeElement.value;
-    const userRole = this.roleInputRef.nativeElement.value;
-    const userStatus = this.statusInputRef.nativeElement.value;
-    const newUser = new User(userName, userRole, userStatus);
-    this.userListService.addUser(newUser);
+  onSubmit(form: NgForm) {
+    const value = form.value;
+    const newUser = new User(value.username, value.role, value.status);
+    if(this.editMode) {
+      this.userListService.updateUser(this.editedUserIndex, newUser);
+    } else {
+      this.userListService.addUser(newUser);
+    }
+    this.editMode = false;
+    form.controls['username'].reset();
+  }
+
+  onClear() {
+    this.userForm.controls['username'].reset();
+    this.editMode = false;
+  }
+
+  onDelete() {
+    this.userListService.deleteUser(this.editedUserIndex);
+    this.onClear();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

@@ -17,11 +17,15 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.users = this.userListService.getUsers();
-    this.subscription = this.userListService.userChanged.subscribe(
+    this.subscription = this.userListService.usersChanged.subscribe(
       (users: User[]) => {
         this.users = users;
       }
     )
+  }
+
+  onEditItem(index: number) {
+    this.userListService.startedEditing.next(index);
   }
 
   ngOnDestroy(): void {
