@@ -49,6 +49,10 @@ export class ProductEditComponent implements OnInit {
     (<FormArray>this.productForm.get('categories')).removeAt(index);
   }
 
+  onDeleteCategories() {
+    (<FormArray>this.productForm.get('categories')).clear();
+  }
+
   onCancel() {
     this.router.navigate(['../'], {relativeTo: this.route});
   }

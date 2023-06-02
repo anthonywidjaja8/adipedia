@@ -6,20 +6,8 @@ import { Product } from "../shared/product.model";
 @Injectable()
 export class ProductService {
     productsChanged = new Subject<Product[]>();
-
+    /*
     private products: Product[] = [
-        new Product(
-            'Product A', 10000, 'Desc A', 
-            'https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-            ['Food', 'Drink']),
-        new Product(
-            'Product B', 20000, 'Desc B', 
-            'https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-            ['Goods', 'Cloth']),
-        new Product(
-            'Product C', 30000, 'Desc C', 
-            'https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-            ['Goods', 'Cloth']),
         new Product(
             'Product D', 40000, 'Desc D', 
             'https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
@@ -29,8 +17,14 @@ export class ProductService {
             'https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
             ['Goods', 'Cloth'])
     ];
-    
+    */
+    private products: Product[] = [];
     constructor(private homeService: HomeService) {}
+
+    setProducts(products: Product[]) {
+        this.products = products;
+        this.productsChanged.next(this.products.slice());
+    }
 
     getProducts() {
         return this.products.slice();
