@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +25,9 @@ import { HomeService } from './home/home.service';
 import { HomeItemComponent } from './home/home-list/home-item/home-item.component';
 import { HomeStartComponent } from './home/home-start/home-start.component';
 import { ProductService } from './products/product.service';
+import { AuthComponent } from './auth/auth.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,9 @@ import { ProductService } from './products/product.service';
     HomeListComponent,
     HomeDetailComponent,
     HomeItemComponent,
-    HomeStartComponent
+    HomeStartComponent,
+    AuthComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +60,15 @@ import { ProductService } from './products/product.service';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [HomeService, ProductService],
+  providers: [
+    HomeService, 
+    ProductService, 
+    {
+      provide: HTTP_INTERCEPTORS, 
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

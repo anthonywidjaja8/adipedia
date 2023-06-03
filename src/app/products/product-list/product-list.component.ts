@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { Product } from '../../shared/product.model';
 import { ProductService } from '../product.service';
 
@@ -13,7 +14,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[];
   subscription: Subscription;
 
-  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private productService: ProductService, private dataStorageService: DataStorageService,
+    private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.subscription = this.productService.productsChanged.subscribe(
@@ -26,6 +28,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   onNewRecipe() {
     this.router.navigate(['new'], {relativeTo: this.route})
+  }
+
+  onSaveData() {
+    this.dataStorageService.storeProducts();
+  }
+
+  onFetchData() {
+    this.dataStorageService.fetchProducts().subscribe();
   }
 
   ngOnDestroy(): void {

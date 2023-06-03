@@ -3,7 +3,7 @@
         <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
             <div class="row">
                 <div class="col-xs-12">
-                    <button type="submit" class="btn btn-success" [disabled]="!productForm.valid">Save</button>
+                    <button type="submit" class="btn btn-success" [disabled]="!productForm.valid">Save</button> |
                     <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                     <hr>
                     <div class="row">
                         <div class="col-xs-12">
-                            <button type="button" class="btn btn-success" (click)="onAddCategory()">Add Category</button>
+                            <button type="button" class="btn btn-success" (click)="onAddCategory()">Add Category</button> |
                             <button type="button" class="btn btn-danger" (click)="onDeleteCategories()">Delete Categories</button>
                         </div>
                     </div>
