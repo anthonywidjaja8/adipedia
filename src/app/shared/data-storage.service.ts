@@ -18,10 +18,7 @@ export class DataStorageService {
         return this.http
             .put(
                 'https://adipedia-product-list-default-rtdb.asia-southeast1.firebasedatabase.app/products.json',
-                products)
-            .subscribe(response => {
-                console.log(response);
-            });
+                products);
     }
 
     fetchProducts() {

@@ -13,6 +13,7 @@ import { ProductService } from '../product.service';
 export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[];
   subscription: Subscription;
+  isLoading = false;
 
   constructor(private productService: ProductService, private dataStorageService: DataStorageService,
     private router: Router, private route: ActivatedRoute) { }
@@ -31,11 +32,21 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   onSaveData() {
-    this.dataStorageService.storeProducts();
+    this.isLoading = true;
+    this.dataStorageService.storeProducts().subscribe(
+      resData => {
+        console.log(resData);
+        this.isLoading = false;
+    });
   }
 
   onFetchData() {
-    this.dataStorageService.fetchProducts().subscribe();
+    this.isLoading = true;
+    this.dataStorageService.fetchProducts().subscribe(
+      resData => {
+        console.log(resData);
+        this.isLoading = false;
+    });
   }
 
   ngOnDestroy(): void {

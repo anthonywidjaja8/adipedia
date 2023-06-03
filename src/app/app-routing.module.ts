@@ -21,7 +21,7 @@ const routes: Routes = [
     {path: '', component: HomeStartComponent},
     {path: ':id', component: HomeDetailComponent}
   ]},
-  {path: 'products', component: ProductsComponent, children: [
+  {path: 'products', component: ProductsComponent, canActivate: [AuthGuard], children: [
     {path: '', component: ProductStartComponent},
     {path: 'new', component: ProductEditComponent},
     {path: ':id', component: ProductDetailComponent, resolve: [ProductsResolverService]},
