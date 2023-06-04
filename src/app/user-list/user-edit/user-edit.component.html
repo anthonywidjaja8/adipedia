@@ -1,10 +1,13 @@
 <div class="row">
     <div class="col-xs-12">
-        <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <div *ngIf="isLoading" style="text-align: center;">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+        <form (ngSubmit)="onSubmit(form)" #form="ngForm" *ngIf="!isLoading">
             <div class="row">
                 <div class="col-sm-5 form-group">
-                    <label for="username">Name</label>
-                    <input type="text" id="username" class="form-control" name="username" ngModel required>
+                    <label for="email">Email</label>
+                    <input type="text" id="email" class="form-control" name="email" ngModel readonly>
                 </div>
                 <div class="col-sm-2 form-group">
                     <label for="role">Role</label>
@@ -23,9 +26,24 @@
             </div>
             <div class="row">
                 <div class="col-xs-12">
+                    <!--
                     <button class="btn btn-success" type="submit" [disabled]="!form.valid">{{ editMode ? 'Update' : 'Add' }}</button> |
                     <button class="btn btn-primary" type="button" (click)="onClear()">Clear</button> |
                     <button class="btn btn-danger" type="button" (click)="onDelete()" *ngIf="editMode">Delete</button>
+                    -->
+                    <button class="btn btn-success" type="submit" [disabled]="!form.valid || !editMode">
+                        <span class="glyphicon glyphicon-repeat"></span> Update
+                    </button> |
+                    <button class="btn btn-danger" type="button" (click)="onClear()">
+                        <span class="glyphicon glyphicon-remove"></span> Clear
+                    </button> |
+                    <button class="btn btn-primary" type="button" [disabled]="!isFetchClicked" (click)="onSaveData()">
+                        <span class="glyphicon glyphicon-download"></span> Save Data
+                    </button> |
+                    <button class="btn btn-info" type="button" (click)="onFetchData()">
+                        <span class="glyphicon glyphicon-refresh"></span> Fetch Data
+                    </button>
+                    <span *ngIf="!editMode" style="color: red;"> Please Fetch Data First!</span>
                 </div>
             </div>
         </form>

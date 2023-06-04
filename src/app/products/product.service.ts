@@ -19,6 +19,7 @@ export class ProductService {
     ];
     */
     private products: Product[] = [];
+    
     constructor(private homeService: HomeService) {}
 
     setProducts(products: Product[]) {

@@ -28,6 +28,7 @@ import { ProductService } from './products/product.service';
 import { AuthComponent } from './auth/auth.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { ReportService } from './reports/report.service';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,8 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
   providers: [
     HomeService, 
     ProductService, 
+    ReportService,
+    UserListService,
     {
       provide: HTTP_INTERCEPTORS, 
       useClass: AuthInterceptorService,

@@ -3,13 +3,19 @@
 </div>
 <div class="row" *ngIf="!isLoading">
     <div class="col-xs-12">
-        <button class="btn btn-success" (click)="onNewRecipe()">New Product</button> |
-        <button class="btn btn-primary" (click)="onSaveData()">Save Data</button> |
-        <button class="btn btn-info" (click)="onFetchData()">Fetch Data</button>
+        <button class="btn btn-success" [disabled]="!isFetchClicked" (click)="onNewProduct()">
+            <span class="glyphicon glyphicon-plus"></span> New Product
+        </button> |
+        <button class="btn btn-primary" [disabled]="!isFetchClicked" (click)="onSaveData()">
+            <span class="glyphicon glyphicon-download"></span> Save Data
+        </button> |
+        <button class="btn btn-info" (click)="onFetchData()">
+            <span class="glyphicon glyphicon-refresh"></span>  Fetch Data
+        </button>
     </div>
 </div>
 <hr>
-<div class="row">
+<div class="row" *ngIf="isFetchClicked">
     <div class="col-xs-12">
         <app-product-item *ngFor="let productItem of products; let i = index" [product]="productItem" [index]="i"></app-product-item>
     </div>

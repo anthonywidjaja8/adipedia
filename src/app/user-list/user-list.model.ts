@@ -1,10 +1,10 @@
 export class User {
-    public username: string;
+    public email: string;
     public role: string;
     public status: string;
 
-    constructor(username: string, role: string, status: string) {
-        this.username = username;
+    constructor(email: string, role: string, status: string) {
+        this.email = email;
         this.role = role;
         this.status = status;
     }

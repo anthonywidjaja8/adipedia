@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UserListService } from './user-list.service';
-import { User } from './user.model';
+import { User } from './user-list.model';
 
 @Component({
   selector: 'app-user-list',
@@ -16,12 +16,12 @@ export class UserListComponent implements OnInit, OnDestroy {
   constructor(private userListService: UserListService) { }
 
   ngOnInit(): void {
-    this.users = this.userListService.getUsers();
     this.subscription = this.userListService.usersChanged.subscribe(
       (users: User[]) => {
         this.users = users;
       }
     )
+    this.users = this.userListService.getUsers();
   }
 
   onEditItem(index: number) {

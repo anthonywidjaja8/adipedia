@@ -5,13 +5,16 @@ import { exhaustMap, map, take, tap } from 'rxjs/operators';
 import { Product } from "./product.model";
 import { ProductService } from "../products/product.service";
 import { AuthService } from "../auth/auth.service";
+import { UserListService } from "../user-list/user-list.service";
+import { User } from "../user-list/user-list.model";
+import { Report } from "../reports/report.model";
 
 @Injectable({
     providedIn: 'root'
 })
 export class DataStorageService {
     constructor(private http: HttpClient, private productService: ProductService,
-        private authService: AuthService) {}
+        private userListService: UserListService, private authService: AuthService) {}
 
     storeProducts() {
         const products = this.productService.getProducts();
@@ -36,4 +39,31 @@ export class DataStorageService {
             })
         );
     }
+
+    fetchReports() {
+        return this.http.get<Report[]>(
+            'https://adipedia-product-list-default-rtdb.asia-southeast1.firebasedatabase.app/reports.json'
+        );
+    }
+
+    storeUsers(users: User[]) {
+        //const users = this.userListService.getUsers();
+        console.log(users);
+        return this.http
+            .put(
+                'https://adipedia-product-list-default-rtdb.asia-southeast1.firebasedatabase.app/users.json',
+                users);
+    }
+
+    fetchUsers() {
+        return this.http.get<User[]>(
+                'https://adipedia-product-list-default-rtdb.asia-southeast1.firebasedatabase.app/users.json'
+        );
+        // .pipe(
+        //     tap(users => {
+        //         this.userService.setUsers(users);
+        //     })
+        // );
+    }
+
 }

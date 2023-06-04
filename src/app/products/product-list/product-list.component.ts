@@ -14,6 +14,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[];
   subscription: Subscription;
   isLoading = false;
+  isFetchClicked = false;
 
   constructor(private productService: ProductService, private dataStorageService: DataStorageService,
     private router: Router, private route: ActivatedRoute) { }
@@ -27,7 +28,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.products = this.productService.getProducts();
   }
 
-  onNewRecipe() {
+  onNewProduct() {
     this.router.navigate(['new'], {relativeTo: this.route})
   }
 
@@ -42,6 +43,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   onFetchData() {
     this.isLoading = true;
+    this.isFetchClicked = true;
     this.dataStorageService.fetchProducts().subscribe(
       resData => {
         console.log(resData);

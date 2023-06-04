@@ -4,7 +4,7 @@
         <hr>
         <ul class="list-group">
             <a class="list-group-item " style="cursor: pointer " *ngFor="let user of users; let i = index" (click)="onEditItem(i)">
-                {{ user.username }} ({{ user.role }}) | Status: {{ user.status }}
+                {{ user.email }} ({{ user.role }}) | Status: {{ user.status }}
             </a>
         </ul>
     </div>
