@@ -8,12 +8,14 @@ import { AuthService } from "../auth/auth.service";
 import { UserListService } from "../user-list/user-list.service";
 import { User } from "../user-list/user-list.model";
 import { Report } from "../reports/report.model";
+import { OrderService } from "../orders/order.service";
+import { Order } from "./order.model";
 
 @Injectable({
     providedIn: 'root'
 })
 export class DataStorageService {
-    constructor(private http: HttpClient, private productService: ProductService,
+    constructor(private http: HttpClient, private productService: ProductService, private orderService: OrderService,
         private userListService: UserListService, private authService: AuthService) {}
 
     storeProducts() {
@@ -36,6 +38,30 @@ export class DataStorageService {
             }), 
             tap(products => {
                 this.productService.setProducts(products);
+            })
+        );
+    }
+
+    storeOrders() {
+        const orders = this.orderService.getOrders();
+        return this.http
+            .put(
+                'https://adipedia-product-list-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json',
+                orders);
+    }
+
+    fetchOrders() {
+        return this.http.get<Order[]>(
+                'https://adipedia-product-list-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json'
+        )
+        .pipe(
+            map(orders => {
+                return orders.map(order => {
+                    return {...order, products: order.products ? order.products : []};
+                });
+            }), 
+            tap(orders => {
+                this.orderService.setOrders(orders);
             })
         );
     }

@@ -27,12 +27,12 @@ export class ProductDetailComponent implements OnInit {
     this.productService.addProductToHome(this.product);
   }
 
-  onEditRecipe() {
+  onEditProduct() {
     this.router.navigate(['edit'], {relativeTo: this.route});
     //this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});
   }
 
-  onDeleteRecipe() {
+  onDeleteProduct() {
     this.productService.deleteProduct(this.id);
     this.router.navigate(['/products']);
   }

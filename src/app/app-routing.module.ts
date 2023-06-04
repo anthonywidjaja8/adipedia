@@ -5,6 +5,10 @@ import { AuthGuard } from './auth/auth.guard';
 import { HomeDetailComponent } from './home/home-detail/home-detail.component';
 import { HomeStartComponent } from './home/home-start/home-start.component';
 import { HomeComponent } from './home/home.component';
+import { OrderDetailComponent } from './orders/order-detail/order-detail.component';
+import { OrderEditComponent } from './orders/order-edit/order-edit.component';
+import { OrderStartComponent } from './orders/order-start/order-start.component';
+import { OrdersResolverService } from './orders/orders-resolver.service';
 import { OrdersComponent } from './orders/orders.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { ProductEditComponent } from './products/product-edit/product-edit.component';
@@ -27,9 +31,14 @@ const routes: Routes = [
     {path: ':id', component: ProductDetailComponent, resolve: [ProductsResolverService]},
     {path: ':id/edit', component: ProductEditComponent, resolve: [ProductsResolverService]},
   ]},
-  {path: 'orders', component: OrdersComponent},
-  {path: 'reports', component: ReportsComponent},
-  {path: 'user-list', component: UserListComponent},
+  {path: 'orders', component: OrdersComponent, canActivate: [AuthGuard], children: [
+    {path: '', component: OrderStartComponent},
+    {path: 'new', component: OrderEditComponent},
+    {path: ':id', component: OrderDetailComponent, resolve: [OrdersResolverService]},
+    {path: ':id/edit', component: OrderEditComponent, resolve: [OrdersResolverService]},
+  ]},
+  {path: 'reports', component: ReportsComponent, canActivate: [AuthGuard]},
+  {path: 'user-list', component: UserListComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

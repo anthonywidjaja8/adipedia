@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-xs-12">
+        <h1>{{ order.id }}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="btn-group" appDropdown>
+            <button type="button" class="btn btn-primary dropdown-toggle">
+                Manage Order <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a style="cursor: pointer;" (click)="onEditOrder()">Edit Order</a></li>
+                <li><a style="cursor: pointer;" (click)="onCancelOrder()">Cancel Order</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        Transaction Date: {{ order.txnDate }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        Buyer: {{ order.buyer }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        Status: {{ order.status }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        Receipt: {{ order.receipt }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        List of Products:
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let product of order.products">
+                {{product}}
+            </li>
+        </ul>
+    </div>
+</div>

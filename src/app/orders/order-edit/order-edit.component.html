@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-xs-12">
+        <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-success" [disabled]="!orderForm.valid">Save</button> |
+                    <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="id">ID</label>
+                        <input type="text" id="id" formControlName="id" class="form-control" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="txnDate">txnDate</label>
+                        <input type="text" id="txnDate" formControlName="txnDate" class="form-control" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="buyer">Buyer</label>
+                        <input type="text" id="buyer" formControlName="buyer" class="form-control" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" formControlName="status" class="form-control" aria-label="status" required>
+                            <option value="Waiting">Waiting</option>
+                            <option value="Processing">Processing</option>
+                            <option value="On Delivery">On Delivery</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="receipt">Receipt</label>
+                        <input type="text" id="receipt" formControlName="receipt" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" formArrayName="products">
+                    <div class="row" *ngFor="let productCtrl of controls; let i = index" style="margin-top: 10px;">
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" [formControlName]="i">
+                        </div>
+                        <div class="col-xs-2">
+                            <button type="button" class="btn btn-danger" (click)="onDeleteProduct(i)">X</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="button" class="btn btn-success" (click)="onAddProduct()">Add Product</button> |
+                            <button type="button" class="btn btn-danger" (click)="onDeleteProducts()">Delete Products</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

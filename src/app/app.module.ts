@@ -29,6 +29,12 @@ import { AuthComponent } from './auth/auth.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { ReportService } from './reports/report.service';
+import { OrderListComponent } from './orders/order-list/order-list.component';
+import { OrderDetailComponent } from './orders/order-detail/order-detail.component';
+import { OrderItemComponent } from './orders/order-list/order-item/order-item.component';
+import { OrderStartComponent } from './orders/order-start/order-start.component';
+import { OrderEditComponent } from './orders/order-edit/order-edit.component';
+import { OrderService } from './orders/order.service';
 
 @NgModule({
   declarations: [
@@ -45,6 +51,11 @@ import { ReportService } from './reports/report.service';
     ProductEditComponent,
     HomeComponent,
     OrdersComponent,
+    OrderListComponent,
+    OrderDetailComponent,
+    OrderItemComponent,
+    OrderStartComponent,
+    OrderEditComponent,
     ReportsComponent,
     HomeListComponent,
     HomeDetailComponent,
@@ -64,6 +75,7 @@ import { ReportService } from './reports/report.service';
   providers: [
     HomeService, 
     ProductService, 
+    OrderService,
     ReportService,
     UserListService,
     {
