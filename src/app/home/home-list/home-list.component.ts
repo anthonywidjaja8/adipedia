@@ -11,6 +11,7 @@ import { HomeService } from '../home.service';
 export class HomeListComponent implements OnInit, OnDestroy {
   products: Product[];
   private subscription: Subscription;
+  filterStatus = '';
 
   constructor(private homeService: HomeService) { }
 

@@ -6,7 +6,7 @@ import { Product } from "./product.model";
 import { ProductService } from "../products/product.service";
 import { AuthService } from "../auth/auth.service";
 import { UserListService } from "../user-list/user-list.service";
-import { User } from "../user-list/user-list.model";
+import { UserList } from "../user-list/user-list.model";
 import { Report } from "../reports/report.model";
 import { OrderService } from "../orders/order.service";
 import { Order } from "./order.model";
@@ -15,8 +15,8 @@ import { Order } from "./order.model";
     providedIn: 'root'
 })
 export class DataStorageService {
-    constructor(private http: HttpClient, private productService: ProductService, private orderService: OrderService,
-        private userListService: UserListService, private authService: AuthService) {}
+    constructor(private http: HttpClient, private productService: ProductService, 
+        private orderService: OrderService) {}
 
     storeProducts() {
         const products = this.productService.getProducts();
@@ -72,7 +72,7 @@ export class DataStorageService {
         );
     }
 
-    storeUsers(users: User[]) {
+    storeUsers(users: UserList[]) {
         //const users = this.userListService.getUsers();
         console.log(users);
         return this.http
@@ -82,7 +82,7 @@ export class DataStorageService {
     }
 
     fetchUsers() {
-        return this.http.get<User[]>(
+        return this.http.get<UserList[]>(
                 'https://adipedia-product-list-default-rtdb.asia-southeast1.firebasedatabase.app/users.json'
         );
         // .pipe(

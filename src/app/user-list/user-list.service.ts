@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
-import { User } from "./user-list.model";
+import { UserList } from "./user-list.model";
 
 @Injectable()
 export class UserListService {
-    usersChanged = new Subject<User[]>();
+    usersChanged = new Subject<UserList[]>();
     startedEditing = new Subject<number>();
     /*
     private users: User[] = [
@@ -12,9 +12,9 @@ export class UserListService {
         new User('sora@gmail.com', 'Admin', 'Inactive')
     ]
     */
-    private users: User[] = [];
+    private users: UserList[] = [];
     
-    setUsers(users: User[]) {
+    setUsers(users: UserList[]) {
         this.users = users;
         this.usersChanged.next(this.users.slice());
     }
@@ -37,7 +37,7 @@ export class UserListService {
         this.usersChanged.next(this.users.slice());
     }
     */
-    updateUser(index: number, newUser: User) {
+    updateUser(index: number, newUser: UserList) {
         this.users[index] = newUser;
         this.usersChanged.next(this.users.slice());
     }

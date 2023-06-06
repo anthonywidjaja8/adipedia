@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UserListService } from './user-list.service';
-import { User } from './user-list.model';
+import { UserList } from './user-list.model';
 
 @Component({
   selector: 'app-user-list',
@@ -10,14 +10,14 @@ import { User } from './user-list.model';
   providers: [UserListService]
 })
 export class UserListComponent implements OnInit, OnDestroy {
-  users: User[];
+  users: UserList[];
   private subscription: Subscription;
 
   constructor(private userListService: UserListService) { }
 
   ngOnInit(): void {
     this.subscription = this.userListService.usersChanged.subscribe(
-      (users: User[]) => {
+      (users: UserList[]) => {
         this.users = users;
       }
     )

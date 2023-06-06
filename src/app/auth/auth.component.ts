@@ -40,7 +40,13 @@ export class AuthComponent {
       resData => {
         console.log(resData);
         this.isLoading = false;
-        this.router.navigate(['/products']);
+        this.authService.role.subscribe(role => {
+          if(role === 'Admin') {
+            this.router.navigate(['/home-admin']);
+          } else {
+            this.router.navigate(['/home']);
+          };
+        });
     }, 
     errorMessage => {
         console.log(errorMessage);
@@ -50,4 +56,5 @@ export class AuthComponent {
 
     form.reset();
   }
+  
 }

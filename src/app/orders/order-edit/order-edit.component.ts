@@ -38,7 +38,7 @@ export class OrderEditComponent implements OnInit {
     }
     this.onCancel();
   }
-
+  /*
   onAddProduct() {
     (<FormArray>this.orderForm.get('products')).push(
       new FormControl('', Validators.required)
@@ -52,7 +52,7 @@ export class OrderEditComponent implements OnInit {
   onDeleteProducts() {
     (<FormArray>this.orderForm.get('products')).clear();
   }
-
+  */
   onCancel() {
     this.router.navigate(['../'], {relativeTo: this.route});
   }

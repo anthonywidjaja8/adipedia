@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } 
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UserListService } from '../user-list.service';
-import { User } from '../user-list.model';
+import { UserList } from '../user-list.model';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { tap } from 'rxjs/operators';
 
@@ -17,7 +17,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   editMode = false;
   editedUserIndex: number;
-  editedUser: User;
+  editedUser: UserList;
   defaultRole = 'Admin';
   defaultStatus = 'Active';
   isLoading = false;
@@ -42,7 +42,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
 
   onSubmit(form: NgForm) {
     const value = form.value;
-    const newUser = new User(value.email, value.role, value.status);
+    const newUser = new UserList(value.email, value.role, value.status);
     /*
     if(this.editMode) {
       this.userListService.updateUser(this.editedUserIndex, newUser);

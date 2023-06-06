@@ -8,14 +8,23 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  email = null;
   isAuthenticated = false;
+  isAdmin = false;
   private userSub: Subscription;
+  private roleSub: Subscription;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
     this.userSub = this.authService.user.subscribe(user => {
       this.isAuthenticated = !!user;
+      this.email = user ? user.email : '';
+    });
+
+    this.roleSub = this.authService.role.subscribe(role => {
+      this.isAdmin = role === 'Admin' ? true : false;
+      console.log('Role: ', role);
     });
   }
 
@@ -25,6 +34,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.userSub.unsubscribe();
+    this.roleSub.unsubscribe();
   }
   
 }

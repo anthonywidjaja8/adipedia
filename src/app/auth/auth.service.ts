@@ -1,8 +1,10 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { BehaviorSubject, throwError } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
+import { BehaviorSubject, Subject, throwError } from "rxjs";
+import { catchError, map, tap } from "rxjs/operators";
+import { DataStorageService } from "../shared/data-storage.service";
+import { UserList } from "../user-list/user-list.model";
 import { User } from "./user.model";
 
 export interface AuthResponseData {
@@ -18,9 +20,11 @@ export interface AuthResponseData {
 @Injectable({providedIn: 'root'})
 export class AuthService {
     user = new BehaviorSubject<User>(null);
+    role = new Subject<String>();
     private tokenExpirationTimer: any;
 
-    constructor(private http: HttpClient, private router: Router) {}
+    constructor(private http: HttpClient, private dataStorageService: DataStorageService,
+        private router: Router) {}
 
     signup(email: string, password: string) {
         return this.http.post<AuthResponseData>(
@@ -32,6 +36,7 @@ export class AuthService {
             })
         .pipe(catchError(this.handleError), tap(resData => {
             this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+            this.insertNewUserToRealtimeDatabase(email);
         }));
     }
 
@@ -45,7 +50,33 @@ export class AuthService {
             })
         .pipe(catchError(this.handleError), tap(resData => {
             this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+            this.getUserRole(email);
         }));
+    }
+
+    insertNewUserToRealtimeDatabase(email: string) {
+        this.dataStorageService.fetchUsers().subscribe(
+            results => {
+              console.log(results);
+              results.push(new UserList(email, 'Seller', 'Active'));
+              console.log(results);
+              this.dataStorageService.storeUsers(results).subscribe();
+              
+              let user = results.filter(user => user.email === email);
+              localStorage.setItem('userRole', JSON.stringify(user[0].role));
+              this.role.next(user[0].role);
+            }
+          )
+    }
+
+    getUserRole(email: string) {
+        this.dataStorageService.fetchUsers().subscribe(
+            results => {
+                let user = results.filter(user => user.email === email);
+                localStorage.setItem('userRole', JSON.stringify(user[0].role));
+                this.role.next(user[0].role);
+            }
+        );
     }
 
     autoLogin() {
@@ -75,6 +106,7 @@ export class AuthService {
         this.user.next(null);
         this.router.navigate(['/auth']);
         localStorage.removeItem('userData');
+        localStorage.removeItem('userRole');
         if(this.tokenExpirationTimer) {
             clearTimeout(this.tokenExpirationTimer);
         }

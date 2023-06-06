@@ -56,19 +56,23 @@
                 <div class="col-xs-12" formArrayName="products">
                     <div class="row" *ngFor="let productCtrl of controls; let i = index" style="margin-top: 10px;">
                         <div class="col-xs-8">
-                            <input type="text" class="form-control" [formControlName]="i">
+                            <input type="text" class="form-control" [formControlName]="i" readonly>
                         </div>
+                        <!--
                         <div class="col-xs-2">
                             <button type="button" class="btn btn-danger" (click)="onDeleteProduct(i)">X</button>
                         </div>
+                        -->
                     </div>
                     <hr>
+                    <!--
                     <div class="row">
                         <div class="col-xs-12">
                             <button type="button" class="btn btn-success" (click)="onAddProduct()">Add Product</button> |
                             <button type="button" class="btn btn-danger" (click)="onDeleteProducts()">Delete Products</button>
                         </div>
                     </div>
+                    -->
                 </div>
             </div>
         </form>

@@ -35,6 +35,8 @@ import { OrderItemComponent } from './orders/order-list/order-item/order-item.co
 import { OrderStartComponent } from './orders/order-start/order-start.component';
 import { OrderEditComponent } from './orders/order-edit/order-edit.component';
 import { OrderService } from './orders/order.service';
+import { HomeAdminComponent } from './home-admin/home-admin.component';
+import { FilterPipe } from './shared/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import { OrderService } from './orders/order.service';
     HomeItemComponent,
     HomeStartComponent,
     AuthComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    HomeAdminComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,10 @@
 <div class="row">
     <div class="col-xs-12">
         <p>Filter</p>
+        <input type="text" [(ngModel)]="filterStatus">
     </div>
 </div>
 <hr>
 <div class="row">
-    <app-home-item *ngFor="let productItem of products; let i = index" [product]="productItem" [index]="i"></app-home-item>
+    <app-home-item *ngFor="let productItem of (products | filter: filterStatus: 'name'); let i = index" [product]="productItem" [index]="i"></app-home-item>
 </div>

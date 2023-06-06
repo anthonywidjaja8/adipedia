@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './auth/auth.guard';
+import { HomeAdminComponent } from './home-admin/home-admin.component';
 import { HomeDetailComponent } from './home/home-detail/home-detail.component';
 import { HomeStartComponent } from './home/home-start/home-start.component';
 import { HomeComponent } from './home/home.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
     {path: '', component: HomeStartComponent},
     {path: ':id', component: HomeDetailComponent}
   ]},
+  {path: 'home-admin', component: HomeAdminComponent, canActivate: [AuthGuard]},
   {path: 'products', component: ProductsComponent, canActivate: [AuthGuard], children: [
     {path: '', component: ProductStartComponent},
     {path: 'new', component: ProductEditComponent},
